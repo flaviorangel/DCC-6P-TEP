@@ -37,5 +37,9 @@ int main(void){
   return 0;
 }
 
-//gcc file.c -o test
+//gcc file.c -o test -lm
 // ./test
+//Git:
+//git add .
+//git commit -m ""
+//git push origin master
