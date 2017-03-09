@@ -4,48 +4,56 @@
 #define SIZE 31
 
 int main(void){
-  int primeiraVez;
   int t, i, j;
   char a[100];
   char b[100];
   char c[100];
   char d[100];
-  int sinal, cont;
+  int jzero = 0;
+  int pararWhile = 0;
 
   scanf("%d", &t);
   for(i = 0; i < t; i++){
-    cont = 0;
-    primeiraVez = 1;
     scanf("%s", a);
     scanf("%s", b);
+    strcpy(d, b);
     do{
-      if(!primeiraVez){
-        strcpy(a, c);
-        strcpy(b, d);
-        b[SIZE + cont] = '0';
-        b[SIZE + cont + 1] = '\0';
-        cont++;
-        printf("%s %.31s\n", a, b + cont);
-      }
-      sinal = 1;
-      for(j = 31; j >= 0; j--){
-        if(a[j] == b[j + cont]){
-          c[j] = '0';
+      strcpy(b, d);
+      printf("%s %s\n", a, b);
+      for(j = 30; j <= 0; j--){
+        puts("entrou no for");
+        if(j == 0){
+          jzero = 1;
+        }
+        if(a[j] == b[j]){
+          a[j] = '0';
           if(a[j] == '1'){
-            d[j] = '1';
-            sinal = 0;
+            if(jzero){
+              jzero = 0;
+              pararWhile = 1;
+              printf("%s overflow\n", a);
+              continue;
+            }
+            d[j - 1] = '1';
           } else {
-            d[j] = '0';
+            if(jzero){
+              jzero = 0;
+              continue;
+            }
+            d[j - 1] = '0';
           }
         } else {
-          c[j] = '1';
-          d[j] = '0';
+          a[j] = '1';
+          if(jzero){
+            jzero = 0;
+            continue;
+          }
+          d[j - 1] = '0';
         }
+        //printf("a[%d] = %c AND b[%d] = %c\nc[%d] = %d AND d[%d] = %d\n", j, a[j], j, b[j], j, c[j], j, d[j]);
       }
-      if(primeiraVez){
-        primeiraVez = 0;
-      }
-    } while((d[0] != '1') || (sinal));
+      //getchar(); //para fazer uma etapa por vez
+    } while(continuar);
   }
   return 0;
 }
